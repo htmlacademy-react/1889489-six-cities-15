@@ -1,4 +1,10 @@
+import { AppRoute } from '../../const';
+import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
+import PageFavorites from '../../pages/page-favorites/page-favorites';
+import PageLogin from '../../pages/page-login/page-login';
 import PageMain from '../../pages/page-main/page-main';
+import PageOffer from '../../pages/page-offer/page-offer';
 
 type AppScreenProps = {
   citiesPlacesCount: number;
@@ -6,7 +12,30 @@ type AppScreenProps = {
 
 function App({citiesPlacesCount}: AppScreenProps): JSX.Element {
   return (
-    <PageMain citiesPlacesCount={citiesPlacesCount} />
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path={AppRoute.Main}
+          element={<PageMain citiesPlacesCount={citiesPlacesCount} />}
+        />
+        <Route
+          path={AppRoute.Favorites}
+          element={<PageFavorites />}
+        />
+        <Route
+          path={AppRoute.Login}
+          element={<PageLogin />}
+        />
+        <Route
+          path={AppRoute.Offer}
+          element={<PageOffer />}
+        />
+        <Route
+          path="*"
+          element={<NotFoundScreen />}
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
