@@ -1,3 +1,6 @@
+import { Link } from 'react-router-dom';
+import Logo from '../../components/logo/logo';
+
 function NotFoundScreen(): JSX.Element {
   return (
     <div className="page page--gray page--login">
@@ -5,15 +8,7 @@ function NotFoundScreen(): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
-                <img
-                  className="header__logo"
-                  src="img/logo.svg"
-                  alt="6 cities logo"
-                  width={81}
-                  height={41}
-                />
-              </a>
+              <Logo />
             </div>
           </div>
         </div>
@@ -21,8 +16,8 @@ function NotFoundScreen(): JSX.Element {
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
-            <h1 className="login__title">EROR 404</h1>
-            <h1 className="login__title">Not Found Screen</h1>
+            <h1 className="login__title">404. Page not found</h1>
+            <Link to="/">Вернуться на главную</Link>
           </section>
         </div>
       </main>
