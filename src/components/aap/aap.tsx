@@ -15,13 +15,14 @@ type AppScreenProps = {
 }
 
 function App({citiesPlacesCount, offers}: AppScreenProps): JSX.Element {
+
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<PageMain citiesPlacesCount={citiesPlacesCount} />}
+            element={<PageMain citiesPlacesCount={citiesPlacesCount} offers={offers} />}
           />
           <Route
             path={AppRoute.Favorites}

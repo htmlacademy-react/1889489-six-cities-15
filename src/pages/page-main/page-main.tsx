@@ -1,10 +1,13 @@
-import CitiesCard from '../../components/cities-card/cities-card';
+// import CitiesCard from '../../components/cities-card/cities-card';
+import OffersList from '../../components/offers-list/offers-list';
+import { Offer } from '../../types/offer';
 
 type PageMainProps = {
   citiesPlacesCount: number;
+  offers: Offer[];
 }
 
-function PageMain({citiesPlacesCount}: PageMainProps): JSX.Element {
+function PageMain({citiesPlacesCount, offers}: PageMainProps): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -115,11 +118,7 @@ function PageMain({citiesPlacesCount}: PageMainProps): JSX.Element {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <CitiesCard />
-                <CitiesCard />
-                <CitiesCard />
-                <CitiesCard />
-                <CitiesCard />
+                <OffersList offers={offers} />
               </div>
             </section>
             <div className="cities__right-section">
