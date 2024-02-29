@@ -7,12 +7,14 @@ import PageMain from '../../pages/page-main/page-main';
 import PageOffer from '../../pages/page-offer/page-offer';
 import PrivateRoute from '../private-route/private-route';
 import { HelmetProvider } from 'react-helmet-async';
+import { Offer } from '../../types/offer';
 
 type AppScreenProps = {
   citiesPlacesCount: number;
+  offers: Offer[];
 }
 
-function App({citiesPlacesCount}: AppScreenProps): JSX.Element {
+function App({citiesPlacesCount, offers}: AppScreenProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
