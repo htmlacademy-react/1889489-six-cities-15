@@ -22,7 +22,7 @@ export const offers: Offer[] = [
     },
     'isFavorite': false,
     'isPremium': false,
-    'rating': 1.9
+    'rating': 1.2
   },
   {
     'id': '53333b49-291e-4338-a23a-f514e86ec7c8',
@@ -45,7 +45,7 @@ export const offers: Offer[] = [
     },
     'isFavorite': false,
     'isPremium': true,
-    'rating': 2
+    'rating': 1.5
   },
   {
     'id': 'e8c444f7-241a-478e-aa12-be04824d8071',
@@ -68,29 +68,29 @@ export const offers: Offer[] = [
     },
     'isFavorite': false,
     'isPremium': true,
-    'rating': 1.2
+    'rating': 4.2
   },
   {
-    'id': 'c3f5cdc1-a8da-4a85-a176-6ff87fed6b96',
-    'title': 'Perfectly located Castro',
+    'id': 'ba3bf035-7a38-4f59-bf40-ff07122f5456',
+    'title': 'Canal View Prinsengracht',
     'type': 'house',
-    'price': 431,
+    'price': 543,
     'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/11.jpg',
     'city': {
-      'name': 'Paris',
+      'name': 'Dusseldorf',
       'location': {
-        'latitude': 48.85661,
-        'longitude': 2.351499,
+        'latitude': 51.225402,
+        'longitude': 6.776314,
         'zoom': 13
       }
     },
     'location': {
-      'latitude': 48.85761,
-      'longitude': 2.358499,
+      'latitude': 51.225402,
+      'longitude': 6.784314,
       'zoom': 16
     },
     'isFavorite': false,
-    'isPremium': false,
-    'rating': 2.3
+    'isPremium': true,
+    'rating': 3.4
   }
 ];

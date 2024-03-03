@@ -1,17 +1,10 @@
 import { MouseEventHandler } from 'react';
 import { Offer } from '../../types/offer';
+import PlaceCardMark from '../place-card-mark/place-card-mark';
 
 type CitiesCardProps = {
   offer: Offer;
   onChangeActiveCardCallback: MouseEventHandler<HTMLElement>;
-}
-
-function PlaceCardMark(): JSX.Element {
-  return (
-    <div className="place-card__mark">
-      <span>Premium</span>
-    </div>
-  );
 }
 
 function CitiesCard(props: CitiesCardProps): JSX.Element {
@@ -56,7 +49,7 @@ function CitiesCard(props: CitiesCardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: '80%' }} />
+            <span style={{width: `${Math.round(offer.rating) * 20}%`}} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

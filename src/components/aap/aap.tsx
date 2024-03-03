@@ -30,7 +30,7 @@ function App({citiesPlacesCount, offers}: AppScreenProps): JSX.Element {
               <PrivateRoute
                 authorizationStatus={AuthorizationStatus.Auth}
               >
-                <PageFavorites />
+                <PageFavorites offers={offers}/>
               </PrivateRoute>
             }
           />

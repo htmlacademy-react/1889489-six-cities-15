@@ -1,4 +1,3 @@
-// import CitiesCard from '../../components/cities-card/cities-card';
 import OffersList from '../../components/offers-list/offers-list';
 import { Offer } from '../../types/offer';
 
