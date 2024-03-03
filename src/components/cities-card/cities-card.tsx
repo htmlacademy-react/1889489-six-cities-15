@@ -1,6 +1,7 @@
 import { MouseEventHandler } from 'react';
 import { Offer } from '../../types/offer';
 import PlaceCardMark from '../place-card-mark/place-card-mark';
+import { Link } from 'react-router-dom';
 
 type CitiesCardProps = {
   offer: Offer;
@@ -54,9 +55,9 @@ function CitiesCard(props: CitiesCardProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">
+          <Link to={`/offer/${offer.id}`} >
             {offer.title}
-          </a>
+          </Link>
         </h2>
         <p className="place-card__type">{offer.type.charAt(0).toUpperCase() + offer.type.slice(1)}</p>
       </div>

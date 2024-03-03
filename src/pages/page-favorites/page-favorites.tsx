@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom';
 import Header from '../../components/header/header';
 import PlaceCardMark from '../../components/place-card-mark/place-card-mark';
-import { Cities } from '../../const';
+import { AppRoute, Cities } from '../../const';
 import { Offer } from '../../types/offer';
 
 type PageFavoritesProps = {
@@ -48,7 +49,7 @@ function PageFavorites({offers}: PageFavoritesProps): JSX.Element {
                                 <div className="place-card__price">
                                   <b className="place-card__price-value">€{cityOffer.price}</b>
                                   <span className="place-card__price-text">
-                        /&nbsp;night
+                                    /&nbsp;night
                                   </span>
                                 </div>
                                 <button
@@ -88,7 +89,7 @@ function PageFavorites({offers}: PageFavoritesProps): JSX.Element {
         </div>
       </main>
       <footer className="footer container">
-        <a className="footer__logo-link" href="main.html">
+        <Link className="footer__logo-link" to={AppRoute.Main}>
           <img
             className="footer__logo"
             src="img/logo.svg"
@@ -96,7 +97,7 @@ function PageFavorites({offers}: PageFavoritesProps): JSX.Element {
             width={64}
             height={33}
           />
-        </a>
+        </Link>
       </footer>
     </div>
   );

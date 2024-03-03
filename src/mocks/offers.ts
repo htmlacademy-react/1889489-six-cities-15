@@ -1,4 +1,4 @@
-import { Offer } from '../types/offer';
+import { Offer, OfferId } from '../types/offer';
 
 export const offers: Offer[] = [
   {
@@ -92,5 +92,152 @@ export const offers: Offer[] = [
     'isFavorite': false,
     'isPremium': true,
     'rating': 3.4
+  }
+];
+
+export const offersId: OfferId[] = [
+  {
+    'id': 'f5d95974-342e-4837-be2d-814ead90908e',
+    'title': 'The Pondhouse - A Magical Place',
+    'type': 'house',
+    'price': 202,
+    'city': {
+      'name': 'Paris',
+      'location': {
+        'latitude': 52.35514938496378,
+        'longitude': 4.673877537499948,
+        'zoom': 8
+      }},
+    'location': {
+      'latitude': 52.35514938496378,
+      'longitude': 4.673877537499948,
+      'zoom': 8
+    },
+    'isFavorite': false,
+    'isPremium': true,
+    'rating': 4,
+    'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    'bedrooms': 3,
+    'goods': [
+      'Heating',
+      'Dishwasher',
+      'Coffee machine',
+      'Washing machine',
+      'Cabel TV'
+    ],
+    'host': {
+      'name': 'Oliver Conner',
+      'avatarUrl': 'img/avatar-angelina.jpg',
+      'isPro': true
+    },
+    'images': [
+      'https://url-to-image/image.png'
+    ],
+    'maxAdults': 7
+  },
+  {
+    'id': '53333b49-291e-4338-a23a-f514e86ec7c8',
+    'title': 'Beautiful & luxurious apartment at great location',
+    'type': 'hotel',
+    'price': 300,
+    'city': {
+      'name': 'Amsterdam',
+      'location': {
+        'latitude': 52.35514938496378,
+        'longitude': 4.673877537499948,
+        'zoom': 8
+      }},
+    'location': {
+      'latitude': 52.35514938496378,
+      'longitude': 4.673877537499948,
+      'zoom': 8
+    },
+    'isFavorite': false,
+    'isPremium': false,
+    'rating': 4,
+    'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    'bedrooms': 3,
+    'goods': [
+      'Heating'
+    ],
+    'host': {
+      'name': 'Oliver Conner',
+      'avatarUrl': 'https://url-to-image/image.png',
+      'isPro': false
+    },
+    'images': [
+      'https://url-to-image/image.png'
+    ],
+    'maxAdults': 4
+  },
+  {
+    'id': 'e8c444f7-241a-478e-aa12-be04824d8071',
+    'title': 'Penthouse, 4-5 rooms + 5 balconies',
+    'type': 'apartment',
+    'price': 470,
+    'city': {
+      'name': 'Amsterdam',
+      'location': {
+        'latitude': 52.35514938496378,
+        'longitude': 4.673877537499948,
+        'zoom': 8
+      }},
+    'location': {
+      'latitude': 52.35514938496378,
+      'longitude': 4.673877537499948,
+      'zoom': 8
+    },
+    'isFavorite': false,
+    'isPremium': false,
+    'rating': 4,
+    'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    'bedrooms': 7,
+    'goods': [
+      'Heating'
+    ],
+    'host': {
+      'name': 'Oliver Conner',
+      'avatarUrl': 'https://url-to-image/image.png',
+      'isPro': false
+    },
+    'images': [
+      'https://url-to-image/image.png'
+    ],
+    'maxAdults': 9
+  },
+  {
+    'id': 'ba3bf035-7a38-4f59-bf40-ff07122f5456',
+    'title': 'Canal View Prinsengracht',
+    'type': 'house',
+    'price': 820,
+    'city': {
+      'name': 'Dusseldorf',
+      'location': {
+        'latitude': 52.35514938496378,
+        'longitude': 4.673877537499948,
+        'zoom': 8
+      }},
+    'location': {
+      'latitude': 52.35514938496378,
+      'longitude': 4.673877537499948,
+      'zoom': 8
+    },
+    'isFavorite': false,
+    'isPremium': true,
+    'rating': 4,
+    'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    'bedrooms': 3,
+    'goods': [
+      'Heating'
+    ],
+    'host': {
+      'name': 'Oliver Conner',
+      'avatarUrl': 'https://url-to-image/image.png',
+      'isPro': false
+    },
+    'images': [
+      'https://url-to-image/image.png'
+    ],
+    'maxAdults': 7
   }
 ];
