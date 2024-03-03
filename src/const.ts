@@ -14,3 +14,9 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export const Cities = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
+export const MIN_REVIEW_LENGTH = 50;
+
+export const MAX_REVIEW_LENGTH = 300;
