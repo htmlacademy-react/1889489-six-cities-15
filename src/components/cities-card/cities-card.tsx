@@ -1,8 +1,9 @@
+import { MouseEventHandler } from 'react';
 import { Offer } from '../../types/offer';
 
 type CitiesCardProps = {
   offer: Offer;
-  key: string;
+  onChangeActiveCardCallback: MouseEventHandler<HTMLElement>;
 }
 
 function PlaceCardMark(): JSX.Element {
@@ -14,10 +15,13 @@ function PlaceCardMark(): JSX.Element {
 }
 
 function CitiesCard(props: CitiesCardProps): JSX.Element {
-  const {offer, key} = props;
+  const {offer, onChangeActiveCardCallback} = props;
 
   return (
-    <article key={key} className="cities__card place-card">
+    <article className="cities__card place-card"
+      id={offer.id}
+      onMouseOver={onChangeActiveCardCallback}
+    >
       {offer.isPremium && <PlaceCardMark/>}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
