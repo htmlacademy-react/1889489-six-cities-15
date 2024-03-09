@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import Header from '../../components/header/header';
 import PlaceCardMark from '../../components/place-card-mark/place-card-mark';
-import { AppRoute, Cities } from '../../const';
+import { AppRoute, CITIES } from '../../const';
 import { Offer } from '../../types/offer';
 
 type PageFavoritesProps = {
@@ -17,7 +17,7 @@ function PageFavorites({offers}: PageFavoritesProps): JSX.Element {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
             <ul className="favorites__list">
-              {Cities.map((city) => {
+              {CITIES.map((city) => {
                 const cityOffers = offers.filter((offer) => offer.city.name === city);
                 if (cityOffers.length > 0) {
                   return(
