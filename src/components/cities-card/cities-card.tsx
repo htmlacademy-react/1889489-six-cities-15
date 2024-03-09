@@ -5,16 +5,18 @@ import { Link } from 'react-router-dom';
 
 type CitiesCardProps = {
   offer: Offer;
-  onChangeActiveCardCallback: MouseEventHandler<HTMLElement>;
+  onActiveCardCallback: MouseEventHandler<HTMLElement>;
+  onNotActiveCardCallback: MouseEventHandler<HTMLElement>;
 }
 
 function CitiesCard(props: CitiesCardProps): JSX.Element {
-  const {offer, onChangeActiveCardCallback} = props;
+  const {offer, onActiveCardCallback, onNotActiveCardCallback} = props;
 
   return (
     <article className="cities__card place-card"
       id={offer.id}
-      onMouseOver={onChangeActiveCardCallback}
+      onMouseOver={onActiveCardCallback}
+      onMouseLeave={onNotActiveCardCallback}
     >
       {offer.isPremium && <PlaceCardMark/>}
       <div className="cities__image-wrapper place-card__image-wrapper">
