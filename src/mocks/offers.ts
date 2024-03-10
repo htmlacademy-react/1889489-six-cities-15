@@ -1,4 +1,4 @@
-import { Offer, OfferId } from '../types/offer';
+import { Comments, Offer, OfferId } from '../types/offer';
 
 export const offers: Offer[] = [
   {
@@ -239,5 +239,52 @@ export const offersId: OfferId[] = [
       'https://url-to-image/image.png'
     ],
     'maxAdults': 7
+  }
+];
+
+export const comments: Comments[] = [
+  {
+    'id': 'f5d95974-342e-4837-be2d-814ead90908e',
+    'date': '2020-08-08T14:13:56.569Z',
+    'user': {
+      'name': 'Oliver Conner',
+      'avatarUrl': 'img/avatar-max.jpg',
+      'isPro': false
+    },
+    'comment': 'The building is green and from 18th century. A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
+    'rating': 1
+  },
+  {
+    'id': 'f5d95974-342e-4837-be2d-814ead90908e',
+    'date': '2019-05-08T14:13:57.569Z',
+    'user': {
+      'name': 'Conner Oliver',
+      'avatarUrl': 'img/avatar-max.jpg',
+      'isPro': true
+    },
+    'comment': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
+    'rating': 4
+  },
+  {
+    'id': 'f5d95974-342e-4837-be2d-814ead90908e',
+    'date': '2017-01-08T14:13:58.569Z',
+    'user': {
+      'name': 'Conner',
+      'avatarUrl': 'img/avatar-max.jpg',
+      'isPro': false
+    },
+    'comment': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. behind a a river by the unique lightness of Amsterdam.',
+    'rating': 2
+  },
+  {
+    'id': 'f5d95974-342e-4837-be2d-814ead90908e',
+    'date': '2019-12-08T14:13:59.569Z',
+    'user': {
+      'name': 'Oliver',
+      'avatarUrl': 'img/avatar-max.jpg',
+      'isPro': false
+    },
+    'comment': 'The building is green and from 18th century.',
+    'rating': 5
   }
 ];
