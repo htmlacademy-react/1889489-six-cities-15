@@ -7,19 +7,20 @@ type CitiesCardProps = {
   offer: Offer;
   onActiveCardCallback: MouseEventHandler<HTMLElement>;
   onNotActiveCardCallback: MouseEventHandler<HTMLElement>;
+  classNameContainer: string;
 }
 
 function CitiesCard(props: CitiesCardProps): JSX.Element {
-  const {offer, onActiveCardCallback, onNotActiveCardCallback} = props;
+  const {offer, onActiveCardCallback, onNotActiveCardCallback, classNameContainer} = props;
 
   return (
-    <article className="cities__card place-card"
+    <article className={`${classNameContainer}__card place-card`}
       id={offer.id}
       onMouseOver={onActiveCardCallback}
       onMouseLeave={onNotActiveCardCallback}
     >
       {offer.isPremium && <PlaceCardMark/>}
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${classNameContainer}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
           <img
             className="place-card__image"

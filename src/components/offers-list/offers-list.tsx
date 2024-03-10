@@ -60,12 +60,13 @@ function OffersList(props: OffersListProps): JSX.Element {
               key={offer.id}
               onActiveCardCallback={handleActiveCard}
               onNotActiveCardCallback={handleNotActiveCard}
+              classNameContainer={'cities'}
             />
           ))}
         </div>
       </section>
       <div className="cities__right-section">
-        <Map offers={offers} selectedPointId={activeCard}/>
+        <Map offers={offers} selectedPointId={activeCard} classNameContainer={'cities__map'}/>
       </div>
     </div>
   );
