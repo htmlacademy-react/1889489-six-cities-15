@@ -43,3 +43,15 @@ export type OfferId = {
   images: [string];
   maxAdults: number;
 }
+
+export type Comments = {
+  id: string;
+  date: string;
+  user: {
+    name: string;
+    avatarUrl: string;
+    isPro: boolean;
+  };
+  comment: string;
+  rating: number;
+}
