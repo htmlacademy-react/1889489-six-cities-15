@@ -1,13 +1,13 @@
 import LocationsTabsList from '../../components/locations-tabs-list/locations-tabs-list';
 import OffersList from '../../components/offers-list/offers-list';
-import { Offer } from '../../types/offer';
+import { useAppSelector } from '../../hooks';
 
-type PageMainProps = {
-  citiesPlacesCount: number;
-  offers: Offer[];
-}
+function PageMain(): JSX.Element {
+  const offersState = useAppSelector((state) => state.offers);
+  const selectedCity = useAppSelector((state) => state.city);
 
-function PageMain({citiesPlacesCount, offers}: PageMainProps): JSX.Element {
+  const offersSelectedCity = offersState.filter((offer) => offer.city.name === selectedCity);
+  const citiesPlacesCount = offersSelectedCity.length;
 
   return (
     <div className="page page--gray page--main">
@@ -53,11 +53,11 @@ function PageMain({citiesPlacesCount, offers}: PageMainProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <LocationsTabsList />
+            <LocationsTabsList selectedCity={selectedCity} />
           </section>
         </div>
         <div className="cities">
-          <OffersList offers={offers} citiesPlacesCount={citiesPlacesCount} />
+          <OffersList offers={offersSelectedCity} citiesPlacesCount={citiesPlacesCount} selectedCity={selectedCity} />
         </div>
       </main>
     </div>

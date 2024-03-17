@@ -10,11 +10,10 @@ import { HelmetProvider } from 'react-helmet-async';
 import { Offer } from '../../types/offer';
 
 type AppScreenProps = {
-  citiesPlacesCount: number;
   offers: Offer[];
 }
 
-function App({citiesPlacesCount, offers}: AppScreenProps): JSX.Element {
+function App({offers}: AppScreenProps): JSX.Element {
 
   return (
     <HelmetProvider>
@@ -22,7 +21,7 @@ function App({citiesPlacesCount, offers}: AppScreenProps): JSX.Element {
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<PageMain citiesPlacesCount={citiesPlacesCount} offers={offers} />}
+            element={<PageMain />}
           />
           <Route
             path={AppRoute.Favorites}

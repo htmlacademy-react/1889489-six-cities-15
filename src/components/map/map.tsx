@@ -1,4 +1,4 @@
-import { Icon, Marker, layerGroup } from 'leaflet';
+import { Icon, LatLng, Marker, layerGroup } from 'leaflet';
 import { Offer } from '../../types/offer';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
 import { useEffect, useRef } from 'react';
@@ -32,6 +32,7 @@ function Map(props: MapProps): JSX.Element {
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
+
       offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
@@ -46,6 +47,10 @@ function Map(props: MapProps): JSX.Element {
           )
           .addTo(markerLayer);
       });
+
+      if (offers[0]) {
+        map.setView(new LatLng(offers[0].city.location.latitude, offers[0].city.location.longitude), offers[0].city.location.zoom);
+      }
 
       return () => {
         map.removeLayer(markerLayer);
