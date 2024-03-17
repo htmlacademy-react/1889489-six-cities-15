@@ -1,6 +1,4 @@
-export const Setting = {
-  citiesPlacesCount: 312
-};
+import { SixCities } from './types/sixCities';
 
 export enum AppRoute {
   Login = '/login',
@@ -15,7 +13,11 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export const HELLO_FROM_CAT = 'MIAO';
+
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'] as const;
+
+export const SIX_CITIES: readonly SixCities[] = ['Amsterdam', 'Paris', 'Dusseldorf', 'Cologne', 'Brussels', 'Hamburg'];
 
 export const MIN_REVIEW_LENGTH = 50;
 

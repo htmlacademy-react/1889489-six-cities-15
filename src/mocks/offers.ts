@@ -39,8 +39,8 @@ export const offers: Offer[] = [
       }
     },
     'location': {
-      'latitude': 52.3609553943508,
-      'longitude': 4.85309666406198,
+      'latitude': 48.8566153943508,
+      'longitude': 2.351499666406198,
       'zoom': 16
     },
     'isFavorite': false,
@@ -62,8 +62,8 @@ export const offers: Offer[] = [
       }
     },
     'location': {
-      'latitude': 52.3909553943508,
-      'longitude': 4.929309666406198,
+      'latitude': 48.8677153943710,
+      'longitude': 2.351499666406198,
       'zoom': 16
     },
     'isFavorite': false,

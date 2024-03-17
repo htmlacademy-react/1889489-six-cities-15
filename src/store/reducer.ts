@@ -13,10 +13,10 @@ const initialState = {
 const reducer = createReducer(initialState, (builder) => {
   builder
     .addCase(changeCity, (state, action) => {
-      state.city = action.payload.city;
+      state.city = action.payload;
     })
     .addCase(loadOffers, (state, action) => {
-      state.offers = action.payload.offers;
+      state.offers = action.payload;
     });
 });
 
