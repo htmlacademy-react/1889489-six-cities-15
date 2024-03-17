@@ -13,6 +13,13 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum TypesOfSorting {
+  Popular = 'Popular',
+  PriceLowToHugh = 'Price: low to high',
+  PriceHighToLow = 'Price: high to low',
+  TopRatedFirst = 'Top rated first',
+}
+
 export const HELLO_FROM_CAT = 'MIAO';
 
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'] as const;

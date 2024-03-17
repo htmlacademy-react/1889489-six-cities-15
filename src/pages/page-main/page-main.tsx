@@ -1,13 +1,26 @@
 import LocationsTabsList from '../../components/locations-tabs-list/locations-tabs-list';
 import OffersList from '../../components/offers-list/offers-list';
+import { TypesOfSorting } from '../../const';
 import { useAppSelector } from '../../hooks';
 
 function PageMain(): JSX.Element {
   const offersState = useAppSelector((state) => state.offers);
   const selectedCity = useAppSelector((state) => state.city);
+  const sortingType = useAppSelector((state) => state.sortingType);
 
   const offersSelectedCity = offersState.filter((offer) => offer.city.name === selectedCity);
   const citiesPlacesCount = offersSelectedCity.length;
+  let sortedOffersSelectedCity = offersSelectedCity;
+
+  if (sortingType === TypesOfSorting.Popular) {
+    sortedOffersSelectedCity = offersSelectedCity;
+  } else if (sortingType === TypesOfSorting.PriceHighToLow) {
+    sortedOffersSelectedCity = offersSelectedCity.toSorted((a, b) => b.price - a.price);
+  } else if (sortingType === TypesOfSorting.PriceLowToHugh) {
+    sortedOffersSelectedCity = offersSelectedCity.toSorted((a, b) => a.price - b.price);
+  } else if (sortingType === TypesOfSorting.TopRatedFirst) {
+    sortedOffersSelectedCity = offersSelectedCity.toSorted((a, b) => b.rating - a.rating);
+  }
 
   return (
     <div className="page page--gray page--main">
@@ -57,7 +70,7 @@ function PageMain(): JSX.Element {
           </section>
         </div>
         <div className="cities">
-          <OffersList offers={offersSelectedCity} citiesPlacesCount={citiesPlacesCount} selectedCity={selectedCity} />
+          <OffersList offers={sortedOffersSelectedCity} citiesPlacesCount={citiesPlacesCount} selectedCity={selectedCity} />
         </div>
       </main>
     </div>

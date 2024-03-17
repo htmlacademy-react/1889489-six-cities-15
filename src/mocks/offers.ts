@@ -25,6 +25,29 @@ export const offers: Offer[] = [
     'rating': 1.2
   },
   {
+    'id': 'f5d95974-342e-4837-be2d-917ead90908e',
+    'title': 'The Pondhouse - A Magical Place',
+    'type': 'hotel',
+    'price': 317,
+    'previewImage': 'https://15.design.htmlacademy.pro/static/hotel/9.jpg',
+    'city': {
+      'name': 'Amsterdam',
+      'location': {
+        'latitude': 52.37454,
+        'longitude': 4.897976,
+        'zoom': 10
+      }
+    },
+    'location': {
+      'latitude': 52.3809553943508,
+      'longitude': 4.86309666406198,
+      'zoom': 16
+    },
+    'isFavorite': true,
+    'isPremium': true,
+    'rating': 2.9
+  },
+  {
     'id': '53333b49-291e-4338-a23a-f514e86ec7c8',
     'title': 'Beautiful & luxurious apartment at great location',
     'type': 'hotel',
