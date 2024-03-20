@@ -13,6 +13,12 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum APIRoute {
+  Offers = '/offers',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 export enum TypesOfSorting {
   Popular = 'Popular',
   PriceLowToHugh = 'Price: low to high',
@@ -20,7 +26,7 @@ export enum TypesOfSorting {
   TopRatedFirst = 'Top rated first',
 }
 
-export const HELLO_FROM_CAT = 'MIAO';
+export const TIMEOUT_SHOW_ERROR = 2000;
 
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'] as const;
 
