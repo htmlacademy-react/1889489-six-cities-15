@@ -11,4 +11,4 @@ export const changeSortingType = createAction<TypesOfSorting>('offers/changeSort
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
-export const setError = createAction<string | null>('offers/setError');
+export const setError = createAction<string | null>('six-cities/setError');

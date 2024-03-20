@@ -26,7 +26,7 @@ export enum TypesOfSorting {
   TopRatedFirst = 'Top rated first',
 }
 
-export const HELLO_FROM_CAT = 'MIAO';
+export const TIMEOUT_SHOW_ERROR = 2000;
 
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'] as const;
 
