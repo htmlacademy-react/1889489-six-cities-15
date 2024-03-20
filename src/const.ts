@@ -13,6 +13,12 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum APIRoute {
+  Offers = '/offers',
+  Login = '/login',
+  Logout = '/logout',
+}
+
 export enum TypesOfSorting {
   Popular = 'Popular',
   PriceLowToHugh = 'Price: low to high',
