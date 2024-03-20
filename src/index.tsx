@@ -4,6 +4,7 @@ import App from './components/aap/aap';
 import { offers } from './mocks/offers';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import ErrorMessage from './components/error-message/error-message';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,6 +13,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store = {store}>
+      <ErrorMessage />
       <App
         offers = {offers}
       />
