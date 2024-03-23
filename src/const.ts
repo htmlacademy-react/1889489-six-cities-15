@@ -26,8 +26,6 @@ export enum TypesOfSorting {
   TopRatedFirst = 'Top rated first',
 }
 
-export const TIMEOUT_SHOW_ERROR = 2000;
-
 export const CITIES = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'] as const;
 
 export const SIX_CITIES: readonly SixCities[] = ['Amsterdam', 'Paris', 'Dusseldorf', 'Cologne', 'Brussels', 'Hamburg'];

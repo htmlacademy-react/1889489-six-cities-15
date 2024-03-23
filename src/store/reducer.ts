@@ -1,7 +1,6 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { changeCity, changeSortingType, loadOffers, requireAuthorization, setError, setOffersDataLoadingStatus } from './action';
+import { changeCity, changeSortingType, loadOffers, requireAuthorization, setOffersDataLoadingStatus, setUserName } from './action';
 import { SixCities } from '../types/sixCities';
-// import { offers } from '../mocks/offers';
 import { AuthorizationStatus, TypesOfSorting } from '../const';
 import { Offer } from '../types/offer';
 
@@ -12,8 +11,8 @@ type InitalState = {
   offers: Offer[];
   sortingType: TypesOfSorting;
   authorizationStatus: AuthorizationStatus;
-  error: string | null;
   isOffersDataLoading: boolean;
+  userName: string;
 }
 
 const initialState: InitalState = {
@@ -21,8 +20,8 @@ const initialState: InitalState = {
   offers: [],
   sortingType: TypesOfSorting.Popular,
   authorizationStatus: AuthorizationStatus.Unknown,
-  error: null,
   isOffersDataLoading: false,
+  userName: '',
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -39,11 +38,11 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
     })
+    .addCase(setUserName, (state, action) => {
+      state.userName = action.payload;
+    })
     .addCase(setOffersDataLoadingStatus, (state, action) => {
       state.isOffersDataLoading = action.payload;
-    })
-    .addCase(setError, (state, action) => {
-      state.error = action.payload;
     });
 });
 
