@@ -1,12 +1,15 @@
+import { Link } from 'react-router-dom';
 import LocationsTabsList from '../../components/locations-tabs-list/locations-tabs-list';
 import OffersList from '../../components/offers-list/offers-list';
 import { TypesOfSorting } from '../../const';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { logoutAction } from '../../store/api-actions';
 
 function PageMain(): JSX.Element {
   const offersState = useAppSelector((state) => state.offers);
   const selectedCity = useAppSelector((state) => state.city);
   const sortingType = useAppSelector((state) => state.sortingType);
+  const dispatch = useAppDispatch();
 
   const offersSelectedCity = offersState.filter((offer) => offer.city.name === selectedCity);
   const citiesPlacesCount = offersSelectedCity.length;
@@ -53,9 +56,15 @@ function PageMain(): JSX.Element {
                   </a>
                 </li>
                 <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
+                  <Link className="header__nav-link"
+                    onClick={(evt) => {
+                      evt.preventDefault();
+                      dispatch(logoutAction());
+                    }}
+                    to='/'
+                  >
                     <span className="header__signout">Sign out</span>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </nav>
