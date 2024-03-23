@@ -1,15 +1,13 @@
-import { Link } from 'react-router-dom';
+import HeaderNavList from '../../components/header-nav-list/header-nav-list';
 import LocationsTabsList from '../../components/locations-tabs-list/locations-tabs-list';
 import OffersList from '../../components/offers-list/offers-list';
 import { TypesOfSorting } from '../../const';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { logoutAction } from '../../store/api-actions';
+import { useAppSelector } from '../../hooks';
 
 function PageMain(): JSX.Element {
   const offersState = useAppSelector((state) => state.offers);
   const selectedCity = useAppSelector((state) => state.city);
   const sortingType = useAppSelector((state) => state.sortingType);
-  const dispatch = useAppDispatch();
 
   const offersSelectedCity = offersState.filter((offer) => offer.city.name === selectedCity);
   const citiesPlacesCount = offersSelectedCity.length;
@@ -42,31 +40,7 @@ function PageMain(): JSX.Element {
               </a>
             </div>
             <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <a
-                    className="header__nav-link header__nav-link--profile"
-                    href="#"
-                  >
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__user-name user__name">
-                  Oliver.conner@gmail.com
-                    </span>
-                    <span className="header__favorite-count">3</span>
-                  </a>
-                </li>
-                <li className="header__nav-item">
-                  <Link className="header__nav-link"
-                    onClick={(evt) => {
-                      evt.preventDefault();
-                      dispatch(logoutAction());
-                    }}
-                    to='/'
-                  >
-                    <span className="header__signout">Sign out</span>
-                  </Link>
-                </li>
-              </ul>
+              <HeaderNavList />
             </nav>
           </div>
         </div>

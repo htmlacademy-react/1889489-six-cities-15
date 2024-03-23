@@ -11,6 +11,8 @@ export const changeSortingType = createAction<TypesOfSorting>('offers/changeSort
 
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
+export const setUserName = createAction<string>('user/setUserName');
+
 export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
 
 export const redirectToRoute = createAction<AppRoute>('six-cities/redirectToRoute');

@@ -1,5 +1,5 @@
 export type UserData = {
-  id: number;
+  isPro: boolean;
   email: string;
   token: string;
 };
