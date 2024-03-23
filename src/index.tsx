@@ -4,8 +4,8 @@ import App from './components/aap/aap';
 import { offers } from './mocks/offers';
 import { Provider } from 'react-redux';
 import { store } from './store';
-import ErrorMessage from './components/error-message/error-message';
 import { checkAuthAction, fetchOfferAction } from './store/api-actions';
+import { ToastContainer } from 'react-toastify';
 
 store.dispatch(fetchOfferAction());
 store.dispatch(checkAuthAction());
@@ -17,7 +17,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store = {store}>
-      <ErrorMessage />
+      <ToastContainer />
       <App
         offers = {offers}
       />
