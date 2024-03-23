@@ -1,5 +1,5 @@
 import { AppRoute, AuthorizationStatus } from '../../const';
-import {Route, BrowserRouter, Routes} from 'react-router-dom';
+import {Route, Routes} from 'react-router-dom';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import PageFavorites from '../../pages/page-favorites/page-favorites';
 import PageLogin from '../../pages/page-login/page-login';
@@ -10,6 +10,8 @@ import { HelmetProvider } from 'react-helmet-async';
 import { Offer } from '../../types/offer';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
+import HistoryRouter from '../history-route/history-route';
+import browserHistory from '../../browser-history';
 
 type AppScreenProps = {
   offers: Offer[];
@@ -27,7 +29,7 @@ function App({offers}: AppScreenProps): JSX.Element {
 
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route
             path={AppRoute.Main}
@@ -56,7 +58,7 @@ function App({offers}: AppScreenProps): JSX.Element {
             element={<NotFoundScreen />}
           />
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }
