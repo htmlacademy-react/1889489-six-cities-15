@@ -54,7 +54,7 @@ function App({offers}: AppScreenProps): JSX.Element {
             element={<PageOffer />}
           />
           <Route
-            path="*"
+            path={AppRoute.NotFoundScreen}
             element={<NotFoundScreen />}
           />
         </Routes>

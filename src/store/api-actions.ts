@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import { AxiosInstance } from 'axios';
-import { Offer } from '../types/offer';
-import { loadOffers, redirectToRoute, requireAuthorization, setOffersDataLoadingStatus, setUserName } from './action';
+import { Offer, OfferId } from '../types/offer';
+import { loadOffer, loadOffers, redirectToRoute, requireAuthorization, setOffersDataLoadingStatus, setUserName } from './action';
 import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
@@ -19,6 +19,22 @@ export const fetchOfferAction = createAsyncThunk<void, undefined, {
     const {data} = await api.get<Offer[]>(APIRoute.Offers);
     dispatch(setOffersDataLoadingStatus(false));
     dispatch(loadOffers(data));
+  },
+);
+
+export const fetchOfferIdAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOffer',
+  async (offerId, {dispatch, extra: api}) => {
+    try {
+      const {data} = await api.get<OfferId>(`${APIRoute.Offers}/${offerId}`);
+      dispatch(loadOffer(data));
+    } catch {
+      dispatch(redirectToRoute(AppRoute.NotFoundScreen));
+    }
   },
 );
 

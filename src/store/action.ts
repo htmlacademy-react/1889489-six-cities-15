@@ -1,9 +1,11 @@
 import {createAction} from '@reduxjs/toolkit';
 import { SixCities } from '../types/sixCities';
-import { Offer } from '../types/offer';
+import { Offer, OfferId } from '../types/offer';
 import { AppRoute, AuthorizationStatus, TypesOfSorting } from '../const';
 
 export const loadOffers = createAction<Offer[]>('offers/loadOffers');
+
+export const loadOffer = createAction<OfferId>('offers/loadOffer');
 
 export const changeCity = createAction<SixCities>('offers/changeCity');
 
