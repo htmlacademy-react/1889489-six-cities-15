@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch, State } from '../types/state';
 import { AxiosInstance } from 'axios';
-import { Offer, OfferId } from '../types/offer';
-import { loadOffer, loadOffers, redirectToRoute, requireAuthorization, setOffersDataLoadingStatus, setUserName } from './action';
+import { Comments, Offer, OfferId } from '../types/offer';
+import { loadComments, loadNearbyOffer, loadOffer, loadOffers, redirectToRoute, requireAuthorization, setOffersDataLoadingStatus, setUserName } from './action';
 import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
@@ -35,6 +35,30 @@ export const fetchOfferIdAction = createAsyncThunk<void, string, {
     } catch {
       dispatch(redirectToRoute(AppRoute.NotFoundScreen));
     }
+  },
+);
+
+export const fetchNearbyOfferAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchNearbyOffer',
+  async (offerId, {dispatch, extra: api}) => {
+    const {data} = await api.get<Offer[]>(`${APIRoute.Offers}/${offerId}/nearby`);
+    dispatch(loadNearbyOffer(data));
+  },
+);
+
+export const fetchCommentsAction = createAsyncThunk<void, string, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchComments',
+  async (offerId, {dispatch, extra: api}) => {
+    const {data} = await api.get<Comments[]>(`${APIRoute.Comments}${offerId}`);
+    dispatch(loadComments(data));
   },
 );
 

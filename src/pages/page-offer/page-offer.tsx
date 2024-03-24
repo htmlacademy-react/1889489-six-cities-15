@@ -1,13 +1,11 @@
 import { useParams } from 'react-router-dom';
 import Header from '../../components/header/header';
-import { comments, offers } from '../../mocks/offers';
 import OfferReviews from '../../components/offer-reviews/offer-reviews';
 import Map from '../../components/map/map';
-import { Offer } from '../../types/offer';
 import CitiesCard from '../../components/cities-card/cities-card';
 import { useEffect, useState } from 'react';
 import { store } from '../../store';
-import { fetchOfferIdAction } from '../../store/api-actions';
+import { fetchCommentsAction, fetchNearbyOfferAction, fetchOfferIdAction } from '../../store/api-actions';
 import { useAppSelector } from '../../hooks';
 
 function OfferMark(): JSX.Element {
@@ -19,21 +17,19 @@ function OfferMark(): JSX.Element {
 }
 
 function PageOffer(): JSX.Element | undefined {
-  const nearOffers: Offer[] = offers.slice(0, 3);
 
   const params = useParams();
   const cityId = params.id;
 
   useEffect(() => {
     store.dispatch(fetchOfferIdAction(cityId!));
+    store.dispatch(fetchNearbyOfferAction(cityId!));
+    store.dispatch(fetchCommentsAction(cityId!));
   }, [cityId]);
 
   const offer = useAppSelector((state) => state.offer);
-  // eslint-disable-next-line no-console
-  console.log('offerState - ', offer);
-
-  // const cityOfferId = offersId.filter((offerId) => offerId.id === cityId);
-  // const cityOffer = cityOfferId.length > 0 ? cityOfferId[0] : offersId[0];
+  const nearbyOffer = useAppSelector((state) => state.nearbyOffer).slice(0, 3);
+  const comments = useAppSelector((state) => state.comments);
 
   const [activeCard, setActiveCard] = useState('');
 
@@ -92,7 +88,7 @@ function PageOffer(): JSX.Element | undefined {
                     {offer.bedrooms} Bedrooms
                   </li>
                   <li className="offer__feature offer__feature--adults">
-              Max {offer.maxAdults} adults
+                    Max {offer.maxAdults} adults
                   </li>
                 </ul>
                 <div className="offer__price">
@@ -134,7 +130,7 @@ function PageOffer(): JSX.Element | undefined {
                 <OfferReviews comments={comments} />
               </div>
             </div>
-            <Map offers={nearOffers} selectedPointId={activeCard} classNameContainer={'offer__map'}/>
+            <Map offers={nearbyOffer} selectedPointId={activeCard} classNameContainer={'offer__map'}/>
           </section>
           <div className="container">
             <section className="near-places places">
@@ -142,7 +138,7 @@ function PageOffer(): JSX.Element | undefined {
           Other places in the neighbourhood
               </h2>
               <div className="near-places__list places__list">
-                {nearOffers.map((nearOffer) => (
+                {nearbyOffer.map((nearOffer) => (
                   <CitiesCard
                     offer={nearOffer}
                     key={nearOffer.id}
