@@ -42,7 +42,7 @@ function PageOffer(): JSX.Element | undefined {
     setActiveCard('');
   };
 
-  if (offer) {
+  if (offer && nearbyOffer.length !== 0 && comments.length !== 0) {
     return (
       <div className="page">
         <Header />
@@ -127,7 +127,7 @@ function PageOffer(): JSX.Element | undefined {
                     </p>
                   </div>
                 </div>
-                <OfferReviews comments={comments} />
+                <OfferReviews comments={comments} offerId={offer.id} />
               </div>
             </div>
             <Map offers={nearbyOffer} selectedPointId={activeCard} classNameContainer={'offer__map'}/>

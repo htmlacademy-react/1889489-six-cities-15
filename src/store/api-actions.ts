@@ -7,6 +7,8 @@ import { APIRoute, AppRoute, AuthorizationStatus } from '../const';
 import { AuthData } from '../types/auth-data';
 import { UserData } from '../types/user-data';
 import { dropToken, saveToken } from '../services/token';
+import { CommentData } from '../types/comment-data';
+import { CheckAuthData } from '../types/check-auth-data';
 
 export const fetchOfferAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
@@ -62,6 +64,18 @@ export const fetchCommentsAction = createAsyncThunk<void, string, {
   },
 );
 
+export const fetchAddNewCommentAction = createAsyncThunk<void, CommentData, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchAddNewComment',
+  async ({offerId, comment, rating}, {dispatch, extra: api}) => {
+    await api.post<UserData>(`${APIRoute.Comments}${offerId}`, {comment, rating});
+    dispatch(fetchCommentsAction(offerId));
+  },
+);
+
 export const checkAuthAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
@@ -70,8 +84,9 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   'user/checkAuth',
   async (_arg, {dispatch, extra: api}) => {
     try {
-      await api.get(APIRoute.Login);
+      const {data: {email}} = await api.get<CheckAuthData>(APIRoute.Login);
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
+      dispatch(setUserName(email));
     } catch {
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     }

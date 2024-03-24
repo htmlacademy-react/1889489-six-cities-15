@@ -1,9 +1,17 @@
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import { MAX_REVIEW_LENGTH, MIN_REVIEW_LENGTH } from '../../const';
+import { useAppDispatch } from '../../hooks';
+import { fetchAddNewCommentAction } from '../../store/api-actions';
 
-function ReviewsForm(): JSX.Element {
+type ReviewsFormProps = {
+  offerId: string;
+}
+
+function ReviewsForm(props: ReviewsFormProps): JSX.Element {
+  const {offerId} = props;
   const [userReview, setUserReview] = useState('');
   const [userRating, setUserRating] = useState(0);
+  const dispatch = useAppDispatch();
 
   function getRatingStars() {
     const raitingStarsItems = [];
@@ -41,8 +49,27 @@ function ReviewsForm(): JSX.Element {
     );
   }
 
+  const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (userReview !== '' && userRating !== 0) {
+      dispatch(fetchAddNewCommentAction({
+        comment: userReview,
+        rating: userRating,
+        offerId: offerId
+      }));
+    }
+
+    setUserReview('');
+    setUserRating(0);
+  };
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form"
+      action=""
+      method="post"
+      onSubmit={handleSubmit}
+    >
       <label className="reviews__label form__label" htmlFor="review">
                 Your review
       </label>
