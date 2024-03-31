@@ -1,4 +1,4 @@
-import {createReducer} from '@reduxjs/toolkit';
+/*import {createReducer} from '@reduxjs/toolkit';
 import { changeCity, changeSortingType, loadComments, loadNearbyOffer, loadOffer, loadOffers, setOffersDataLoadingStatus, setUserName } from './action';
 import { SixCities } from '../types/sixCities';
 import { TypesOfSorting } from '../const';
@@ -52,7 +52,7 @@ const reducer = createReducer(initialState, (builder) => {
     })
     /*.addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
-    })*/
+    })
     .addCase(setUserName, (state, action) => {
       state.userName = action.payload;
     })
@@ -61,4 +61,4 @@ const reducer = createReducer(initialState, (builder) => {
     });
 });
 
-export {reducer};
+export {reducer};*/
