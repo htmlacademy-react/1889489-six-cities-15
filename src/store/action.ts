@@ -1,7 +1,7 @@
 import {createAction} from '@reduxjs/toolkit';
 import { SixCities } from '../types/sixCities';
 import { Comments, Offer, OfferId } from '../types/offer';
-import { AppRoute, AuthorizationStatus, TypesOfSorting } from '../const';
+import { AppRoute, TypesOfSorting } from '../const';
 
 export const loadOffers = createAction<Offer[]>('offers/loadOffers');
 
@@ -15,7 +15,7 @@ export const changeCity = createAction<SixCities>('offers/changeCity');
 
 export const changeSortingType = createAction<TypesOfSorting>('offers/changeSortingType');
 
-export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
+// export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 
 export const setUserName = createAction<string>('user/setUserName');
 
