@@ -1,5 +1,6 @@
 import { AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import { Comments } from '../../types/offer';
 import ReviewsForm from '../reviews-form/reviews-form';
 import ReviewsList from '../reviews-list/reviews-list';
@@ -11,7 +12,7 @@ type OfferReviewsProps = {
 
 function OfferReviews(props: OfferReviewsProps): JSX.Element {
   const {comments, offerId} = props;
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
     <section className="offer__reviews reviews">
