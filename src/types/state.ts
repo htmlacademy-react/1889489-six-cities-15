@@ -18,6 +18,7 @@ export type SixCitiesData = {
   nearbyOffer: Offer[];
   comments: Comments[];
   isOffersDataLoading: boolean;
+  hasError: boolean;
 };
 
 export type SixCitiesProcess = {

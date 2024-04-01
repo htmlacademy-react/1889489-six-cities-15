@@ -9,6 +9,7 @@ const initialState: SixCitiesData = {
   nearbyOffer: [],
   comments: [],
   isOffersDataLoading: false,
+  hasError: false,
 };
 
 export const sixCitiesData = createSlice({
@@ -19,10 +20,15 @@ export const sixCitiesData = createSlice({
     builder
       .addCase(fetchOffersAction.pending, (state) => {
         state.isOffersDataLoading = true;
+        state.hasError = false;
       })
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
         state.offers = action.payload;
         state.isOffersDataLoading = false;
+      })
+      .addCase(fetchOffersAction.rejected, (state) => {
+        state.isOffersDataLoading = false;
+        state.hasError = true;
       })
       .addCase(fetchOfferIdAction.fulfilled, (state, action) => {
         state.offer = action.payload!;

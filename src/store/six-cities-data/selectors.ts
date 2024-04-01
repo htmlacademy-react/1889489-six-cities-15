@@ -7,3 +7,4 @@ export const getOffer = (state: State): OfferId | null => state[NameSpace.Data].
 export const getNearbyOffer = (state: State): Offer[] => state[NameSpace.Data].nearbyOffer;
 export const getComments = (state: State): Comments[] => state[NameSpace.Data].comments;
 export const getOffersDataLoadingStatus = (state: State): boolean => state[NameSpace.Data].isOffersDataLoading;
+export const getErrorStatus = (state: State): boolean => state[NameSpace.Data].hasError;
