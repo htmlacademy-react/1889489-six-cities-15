@@ -1,15 +1,17 @@
 import HeaderNavList from '../../components/header-nav-list/header-nav-list';
 import LocationsTabsList from '../../components/locations-tabs-list/locations-tabs-list';
+import MainEmpty from '../../components/main-empty/main-empty';
 import OffersList from '../../components/offers-list/offers-list';
 import { TypesOfSorting } from '../../const';
 import { useAppSelector } from '../../hooks';
-import { getOffers } from '../../store/six-cities-data/selectors';
+import { getErrorStatus, getOffers } from '../../store/six-cities-data/selectors';
 import { getCity, getSortingType } from '../../store/six-cities-process/selectors';
 
 function PageMain(): JSX.Element {
   const offersState = useAppSelector(getOffers);
   const selectedCity = useAppSelector(getCity);
   const sortingType = useAppSelector(getSortingType);
+  const hasError = useAppSelector(getErrorStatus);
 
   const offersSelectedCity = offersState.filter((offer) => offer.city.name === selectedCity);
   const citiesPlacesCount = offersSelectedCity.length;
@@ -55,7 +57,8 @@ function PageMain(): JSX.Element {
           </section>
         </div>
         <div className="cities">
-          <OffersList offers={sortedOffersSelectedCity} citiesPlacesCount={citiesPlacesCount} selectedCity={selectedCity} />
+          {hasError && <MainEmpty selectedCity={selectedCity} />}
+          {!hasError && <OffersList offers={sortedOffersSelectedCity} citiesPlacesCount={citiesPlacesCount} selectedCity={selectedCity} />}
         </div>
       </main>
     </div>
