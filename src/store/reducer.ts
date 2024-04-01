@@ -1,7 +1,7 @@
-import {createReducer} from '@reduxjs/toolkit';
-import { changeCity, changeSortingType, loadComments, loadNearbyOffer, loadOffer, loadOffers, requireAuthorization, setOffersDataLoadingStatus, setUserName } from './action';
+/*import {createReducer} from '@reduxjs/toolkit';
+import { changeCity, changeSortingType, loadComments, loadNearbyOffer, loadOffer, loadOffers, setOffersDataLoadingStatus, setUserName } from './action';
 import { SixCities } from '../types/sixCities';
-import { AuthorizationStatus, TypesOfSorting } from '../const';
+import { TypesOfSorting } from '../const';
 import { Comments, Offer, OfferId } from '../types/offer';
 
 const INITIAL_CITY: SixCities = 'Paris';
@@ -13,7 +13,7 @@ type InitalState = {
   nearbyOffer: Offer[];
   comments: Comments[];
   sortingType: TypesOfSorting;
-  authorizationStatus: AuthorizationStatus;
+  // authorizationStatus: AuthorizationStatus;
   isOffersDataLoading: boolean;
   userName: string;
 }
@@ -25,7 +25,7 @@ const initialState: InitalState = {
   nearbyOffer: [],
   comments: [],
   sortingType: TypesOfSorting.Popular,
-  authorizationStatus: AuthorizationStatus.Unknown,
+  // authorizationStatus: AuthorizationStatus.Unknown,
   isOffersDataLoading: false,
   userName: '',
 };
@@ -50,7 +50,7 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(changeSortingType, (state, action) => {
       state.sortingType = action.payload;
     })
-    .addCase(requireAuthorization, (state, action) => {
+    /*.addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
     })
     .addCase(setUserName, (state, action) => {
@@ -61,4 +61,4 @@ const reducer = createReducer(initialState, (builder) => {
     });
 });
 
-export {reducer};
+export {reducer};*/

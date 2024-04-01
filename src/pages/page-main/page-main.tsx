@@ -3,11 +3,13 @@ import LocationsTabsList from '../../components/locations-tabs-list/locations-ta
 import OffersList from '../../components/offers-list/offers-list';
 import { TypesOfSorting } from '../../const';
 import { useAppSelector } from '../../hooks';
+import { getOffers } from '../../store/six-cities-data/selectors';
+import { getCity, getSortingType } from '../../store/six-cities-process/selectors';
 
 function PageMain(): JSX.Element {
-  const offersState = useAppSelector((state) => state.offers);
-  const selectedCity = useAppSelector((state) => state.city);
-  const sortingType = useAppSelector((state) => state.sortingType);
+  const offersState = useAppSelector(getOffers);
+  const selectedCity = useAppSelector(getCity);
+  const sortingType = useAppSelector(getSortingType);
 
   const offersSelectedCity = offersState.filter((offer) => offer.city.name === selectedCity);
   const citiesPlacesCount = offersSelectedCity.length;

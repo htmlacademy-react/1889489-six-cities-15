@@ -1,6 +1,6 @@
 import { SIX_CITIES } from '../../const';
 import { useAppDispatch } from '../../hooks';
-import { changeCity } from '../../store/action';
+import { changeCity } from '../../store/six-cities-process/six-cities-process';
 import { SixCities } from '../../types/sixCities';
 
 type LocationsTabsListProps = {

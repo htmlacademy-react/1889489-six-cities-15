@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { TypesOfSorting } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { changeSortingType } from '../../store/action';
+import { getSortingType } from '../../store/six-cities-process/selectors';
+import { changeSortingType } from '../../store/six-cities-process/six-cities-process';
 
 function PlacesSorting(): JSX.Element {
   const [isOpenList, setIsOpenList] = useState(false);
   const dispatch = useAppDispatch();
-  const sortingType = useAppSelector((state) => state.sortingType);
+  const sortingType = useAppSelector(getSortingType);
 
   return (
     <form className="places__sorting" action="#" method="get">

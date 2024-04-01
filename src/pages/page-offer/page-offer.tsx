@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import { store } from '../../store';
 import { fetchCommentsAction, fetchNearbyOfferAction, fetchOfferIdAction } from '../../store/api-actions';
 import { useAppSelector } from '../../hooks';
+import { getComments, getNearbyOffer, getOffer } from '../../store/six-cities-data/selectors';
 
 function OfferMark(): JSX.Element {
   return (
@@ -27,9 +28,9 @@ function PageOffer(): JSX.Element | undefined {
     store.dispatch(fetchCommentsAction(cityId!));
   }, [cityId]);
 
-  const offer = useAppSelector((state) => state.offer);
-  const nearbyOffer = useAppSelector((state) => state.nearbyOffer).slice(0, 3);
-  const comments = useAppSelector((state) => state.comments);
+  const offer = useAppSelector(getOffer);
+  const nearbyOffer = useAppSelector(getNearbyOffer).slice(0, 3);
+  const comments = useAppSelector(getComments);
 
   const [activeCard, setActiveCard] = useState('');
 

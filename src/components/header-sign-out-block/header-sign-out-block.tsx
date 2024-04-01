@@ -2,10 +2,12 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { logoutAction } from '../../store/api-actions';
 import { AppRoute } from '../../const';
+import { getUserName } from '../../store/user-process/selectors';
 
 function HeaderSignOutBlock(): JSX.Element {
   const dispatch = useAppDispatch();
-  const userName = useAppSelector((state) => state.userName);
+  const userName = useAppSelector(getUserName);
+
 
   return (
     <ul className="header__nav-list">
