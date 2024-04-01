@@ -1,6 +1,6 @@
 import { Offer } from '../../types/offer';
 import CitiesCard from '../cities-card/cities-card';
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import Map from '../../components/map/map';
 import { SixCities } from '../../types/sixCities';
 import PlacesSorting from '../places-sorting/places-sorting';
@@ -16,14 +16,14 @@ function OffersList(props: OffersListProps): JSX.Element {
 
   const [activeCard, setActiveCard] = useState('');
 
-  const handleActiveCard = (evt: { currentTarget: HTMLElement }) => {
+  const handleActiveCard = useCallback((evt: { currentTarget: HTMLElement }) => {
     const currentId = evt.currentTarget.getAttribute('id');
     setActiveCard(currentId === null ? '' : currentId);
-  };
+  }, []);
 
-  const handleNotActiveCard = () => {
+  const handleNotActiveCard = useCallback(() => {
     setActiveCard('');
-  };
+  }, []);
 
   return (
     <div className="cities__places-container container">

@@ -1,4 +1,4 @@
-import { MouseEventHandler } from 'react';
+import { MouseEventHandler, memo } from 'react';
 import { Offer } from '../../types/offer';
 import PlaceCardMark from '../place-card-mark/place-card-mark';
 import { Link } from 'react-router-dom';
@@ -10,7 +10,7 @@ type CitiesCardProps = {
   classNameContainer: string;
 }
 
-function CitiesCard(props: CitiesCardProps): JSX.Element {
+function CitiesCardWithoutMemo(props: CitiesCardProps): JSX.Element {
   const {offer, onActiveCardCallback, onNotActiveCardCallback, classNameContainer} = props;
 
   return (
@@ -67,5 +67,7 @@ function CitiesCard(props: CitiesCardProps): JSX.Element {
     </article>
   );
 }
+
+const CitiesCard = memo(CitiesCardWithoutMemo);
 
 export default CitiesCard;
