@@ -2,16 +2,34 @@ import { MouseEventHandler, memo } from 'react';
 import { Offer } from '../../types/offer';
 import PlaceCardMark from '../place-card-mark/place-card-mark';
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchChangeSatusFavoriteOfferAction, fetchOffersAction } from '../../store/api-actions';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { redirectToRoute } from '../../store/action';
 
 type CitiesCardProps = {
   offer: Offer;
-  onActiveCardCallback: MouseEventHandler<HTMLElement>;
-  onNotActiveCardCallback: MouseEventHandler<HTMLElement>;
+  onActiveCardCallback?: MouseEventHandler<HTMLElement>;
+  onNotActiveCardCallback?: MouseEventHandler<HTMLElement>;
   classNameContainer: string;
+  width: number;
+  height: number;
 }
 
 function CitiesCardWithoutMemo(props: CitiesCardProps): JSX.Element {
-  const {offer, onActiveCardCallback, onNotActiveCardCallback, classNameContainer} = props;
+  const {offer, onActiveCardCallback, onNotActiveCardCallback, classNameContainer, width, height} = props;
+  const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
+  const handleButtonActiveCardClick = (offerId: string, isFavorite: boolean)=> {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(fetchChangeSatusFavoriteOfferAction({offerId: offerId, status: Number(!isFavorite)}));
+      dispatch(fetchOffersAction());
+      return;
+    }
+    dispatch(redirectToRoute(AppRoute.Login));
+  };
 
   return (
     <article className={`${classNameContainer}__card place-card`}
@@ -25,21 +43,22 @@ function CitiesCardWithoutMemo(props: CitiesCardProps): JSX.Element {
           <img
             className="place-card__image"
             src={offer.previewImage}
-            width={260}
-            height={200}
+            width={width}
+            height={height}
             alt="Place image"
           />
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={`${classNameContainer}__card-info place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">€{offer.price}</b>
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
           <button
-            className="place-card__bookmark-button button"
+            className={`${offer.isFavorite ? 'place-card__bookmark-button--active' : ''} place-card__bookmark-button button`}
             type="button"
+            onClick={() => handleButtonActiveCardClick(offer.id, offer.isFavorite)}
           >
             <svg
               className="place-card__bookmark-icon"

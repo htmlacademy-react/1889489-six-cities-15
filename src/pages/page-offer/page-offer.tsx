@@ -3,11 +3,15 @@ import Header from '../../components/header/header';
 import OfferReviews from '../../components/offer-reviews/offer-reviews';
 import Map from '../../components/map/map';
 import CitiesCard from '../../components/cities-card/cities-card';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { store } from '../../store';
-import { fetchCommentsAction, fetchNearbyOfferAction, fetchOfferIdAction } from '../../store/api-actions';
-import { useAppSelector } from '../../hooks';
+import { fetchChangeSatusFavoriteOfferAction, fetchCommentsAction, fetchFavoriteOffersAction, fetchNearbyOfferAction, fetchOfferIdAction, fetchOffersAction } from '../../store/api-actions';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getComments, getNearbyOffer, getOffer } from '../../store/six-cities-data/selectors';
+import { Offer } from '../../types/offer';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { redirectToRoute } from '../../store/action';
 
 function OfferMark(): JSX.Element {
   return (
@@ -21,26 +25,30 @@ function PageOffer(): JSX.Element | undefined {
 
   const params = useParams();
   const cityId = params.id;
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   useEffect(() => {
     store.dispatch(fetchOfferIdAction(cityId!));
     store.dispatch(fetchNearbyOfferAction(cityId!));
     store.dispatch(fetchCommentsAction(cityId!));
-  }, [cityId]);
+  }, [cityId, authorizationStatus]);
 
   const offer = useAppSelector(getOffer);
   const nearbyOffer = useAppSelector(getNearbyOffer).slice(0, 3);
+
+  const nearbyOfferForMap: Offer[] = [...nearbyOffer, {...offer!, previewImage: '',}];
+
   const comments = useAppSelector(getComments);
+  const dispatch = useAppDispatch();
 
-  const [activeCard, setActiveCard] = useState('');
-
-  const handleActiveCard = (evt: { currentTarget: HTMLElement }) => {
-    const currentId = evt.currentTarget.getAttribute('id');
-    setActiveCard(currentId === null ? '' : currentId);
-  };
-
-  const handleNotActiveCard = () => {
-    setActiveCard('');
+  const handleButtonActiveCardClick = (offerId: string, isFavorite: boolean)=> {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(fetchChangeSatusFavoriteOfferAction({offerId: offerId, status: Number(!isFavorite)}));
+      dispatch(fetchOffersAction());
+      dispatch(fetchFavoriteOffersAction());
+      return;
+    }
+    dispatch(redirectToRoute(AppRoute.Login));
   };
 
   if (offer && nearbyOffer.length !== 0 && comments.length !== 0) {
@@ -69,7 +77,10 @@ function PageOffer(): JSX.Element | undefined {
                   <h1 className="offer__name">
                     {offer.title}
                   </h1>
-                  <button className="offer__bookmark-button button" type="button">
+                  <button className={`${offer.isFavorite ? 'offer__bookmark-button--active' : ''} offer__bookmark-button button`}
+                    type="button"
+                    onClick={() => handleButtonActiveCardClick(offer.id, offer.isFavorite)}
+                  >
                     <svg className="offer__bookmark-icon" width={31} height={33}>
                       <use xlinkHref="#icon-bookmark" />
                     </svg>
@@ -86,10 +97,10 @@ function PageOffer(): JSX.Element | undefined {
                 <ul className="offer__features">
                   <li className="offer__feature offer__feature--entire">{offer.type.charAt(0).toUpperCase() + offer.type.slice(1)}</li>
                   <li className="offer__feature offer__feature--bedrooms">
-                    {offer.bedrooms} Bedrooms
+                    {offer.bedrooms} {`${offer.bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}`}
                   </li>
                   <li className="offer__feature offer__feature--adults">
-                    Max {offer.maxAdults} adults
+                    Max {offer.maxAdults} {`${offer.maxAdults > 1 ? 'adults' : 'adult'}`}
                   </li>
                 </ul>
                 <div className="offer__price">
@@ -131,21 +142,21 @@ function PageOffer(): JSX.Element | undefined {
                 <OfferReviews comments={comments} offerId={offer.id} />
               </div>
             </div>
-            <Map offers={nearbyOffer} selectedPointId={activeCard} classNameContainer={'offer__map'}/>
+            <Map offers={nearbyOfferForMap} selectedPointId={offer.id} classNameContainer={'offer__map'}/>
           </section>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">
-          Other places in the neighbourhood
+                Other places in the neighbourhood
               </h2>
               <div className="near-places__list places__list">
                 {nearbyOffer.map((nearOffer) => (
                   <CitiesCard
                     offer={nearOffer}
                     key={nearOffer.id}
-                    onActiveCardCallback={handleActiveCard}
-                    onNotActiveCardCallback={handleNotActiveCard}
                     classNameContainer={'near-places'}
+                    width={260}
+                    height={200}
                   />
                 ))}
               </div>

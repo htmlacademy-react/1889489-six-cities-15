@@ -7,7 +7,6 @@ import PageMain from '../../pages/page-main/page-main';
 import PageOffer from '../../pages/page-offer/page-offer';
 import PrivateRoute from '../private-route/private-route';
 import { HelmetProvider } from 'react-helmet-async';
-import { Offer } from '../../types/offer';
 import { useAppSelector } from '../../hooks';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import HistoryRouter from '../history-route/history-route';
@@ -15,11 +14,7 @@ import browserHistory from '../../browser-history';
 import { getAuthCheckedStatus, getAuthorizationStatus } from '../../store/user-process/selectors';
 import { getOffersDataLoadingStatus } from '../../store/six-cities-data/selectors';
 
-type AppScreenProps = {
-  offers: Offer[];
-}
-
-function App({offers}: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const isAuthChecked = useAppSelector(getAuthCheckedStatus);
   const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
@@ -44,7 +39,7 @@ function App({offers}: AppScreenProps): JSX.Element {
               <PrivateRoute
                 authorizationStatus={authorizationStatus}
               >
-                <PageFavorites offers={offers}/>
+                <PageFavorites/>
               </PrivateRoute>
             }
           />

@@ -39,6 +39,8 @@ function OffersList(props: OffersListProps): JSX.Element {
               onActiveCardCallback={handleActiveCard}
               onNotActiveCardCallback={handleNotActiveCard}
               classNameContainer={'cities'}
+              width={260}
+              height={200}
             />
           ))}
         </div>

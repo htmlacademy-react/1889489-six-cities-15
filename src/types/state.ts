@@ -14,10 +14,12 @@ export type UserProcess = {
 
 export type SixCitiesData = {
   offers: Offer[];
+  favoriteOffer: Offer[];
   offer: OfferId | null;
   nearbyOffer: Offer[];
   comments: Comments[];
   isOffersDataLoading: boolean;
+  hasError: boolean;
 };
 
 export type SixCitiesProcess = {
