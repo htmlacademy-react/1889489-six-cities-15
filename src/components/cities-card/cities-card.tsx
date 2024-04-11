@@ -22,7 +22,7 @@ function CitiesCardWithoutMemo(props: CitiesCardProps): JSX.Element {
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
-  const handleNotActiveCard = (offerId: string, isFavorite: boolean)=> {
+  const handleButtonActiveCardClick = (offerId: string, isFavorite: boolean)=> {
     if (authorizationStatus === AuthorizationStatus.Auth) {
       dispatch(fetchChangeSatusFavoriteOfferAction({offerId: offerId, status: Number(!isFavorite)}));
       dispatch(fetchOffersAction());
@@ -58,7 +58,7 @@ function CitiesCardWithoutMemo(props: CitiesCardProps): JSX.Element {
           <button
             className={`${offer.isFavorite ? 'place-card__bookmark-button--active' : ''} place-card__bookmark-button button`}
             type="button"
-            onClick={() => handleNotActiveCard(offer.id, offer.isFavorite)}
+            onClick={() => handleButtonActiveCardClick(offer.id, offer.isFavorite)}
           >
             <svg
               className="place-card__bookmark-icon"

@@ -5,10 +5,13 @@ import Map from '../../components/map/map';
 import CitiesCard from '../../components/cities-card/cities-card';
 import { useEffect } from 'react';
 import { store } from '../../store';
-import { fetchCommentsAction, fetchNearbyOfferAction, fetchOfferIdAction } from '../../store/api-actions';
-import { useAppSelector } from '../../hooks';
+import { fetchChangeSatusFavoriteOfferAction, fetchCommentsAction, fetchFavoriteOffersAction, fetchNearbyOfferAction, fetchOfferIdAction, fetchOffersAction } from '../../store/api-actions';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { getComments, getNearbyOffer, getOffer } from '../../store/six-cities-data/selectors';
 import { Offer } from '../../types/offer';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { redirectToRoute } from '../../store/action';
 
 function OfferMark(): JSX.Element {
   return (
@@ -22,12 +25,13 @@ function PageOffer(): JSX.Element | undefined {
 
   const params = useParams();
   const cityId = params.id;
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   useEffect(() => {
     store.dispatch(fetchOfferIdAction(cityId!));
     store.dispatch(fetchNearbyOfferAction(cityId!));
     store.dispatch(fetchCommentsAction(cityId!));
-  }, [cityId]);
+  }, [cityId, authorizationStatus]);
 
   const offer = useAppSelector(getOffer);
   const nearbyOffer = useAppSelector(getNearbyOffer).slice(0, 3);
@@ -35,6 +39,17 @@ function PageOffer(): JSX.Element | undefined {
   const nearbyOfferForMap: Offer[] = [...nearbyOffer, {...offer!, previewImage: '',}];
 
   const comments = useAppSelector(getComments);
+  const dispatch = useAppDispatch();
+
+  const handleButtonActiveCardClick = (offerId: string, isFavorite: boolean)=> {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(fetchChangeSatusFavoriteOfferAction({offerId: offerId, status: Number(!isFavorite)}));
+      dispatch(fetchOffersAction());
+      dispatch(fetchFavoriteOffersAction());
+      return;
+    }
+    dispatch(redirectToRoute(AppRoute.Login));
+  };
 
   if (offer && nearbyOffer.length !== 0 && comments.length !== 0) {
     return (
@@ -62,7 +77,10 @@ function PageOffer(): JSX.Element | undefined {
                   <h1 className="offer__name">
                     {offer.title}
                   </h1>
-                  <button className="offer__bookmark-button button" type="button">
+                  <button className={`${offer.isFavorite ? 'offer__bookmark-button--active' : ''} offer__bookmark-button button`}
+                    type="button"
+                    onClick={() => handleButtonActiveCardClick(offer.id, offer.isFavorite)}
+                  >
                     <svg className="offer__bookmark-icon" width={31} height={33}>
                       <use xlinkHref="#icon-bookmark" />
                     </svg>
