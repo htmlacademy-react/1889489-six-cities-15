@@ -79,10 +79,10 @@ function PageOffer(): JSX.Element | undefined {
                 <ul className="offer__features">
                   <li className="offer__feature offer__feature--entire">{offer.type.charAt(0).toUpperCase() + offer.type.slice(1)}</li>
                   <li className="offer__feature offer__feature--bedrooms">
-                    {offer.bedrooms} Bedrooms
+                    {offer.bedrooms} {`${offer.bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}`}
                   </li>
                   <li className="offer__feature offer__feature--adults">
-                    Max {offer.maxAdults} adults
+                    Max {offer.maxAdults} {`${offer.maxAdults > 1 ? 'adults' : 'adult'}`}
                   </li>
                 </ul>
                 <div className="offer__price">
