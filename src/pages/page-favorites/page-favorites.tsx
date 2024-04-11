@@ -1,14 +1,21 @@
 import { Link } from 'react-router-dom';
 import Header from '../../components/header/header';
-import PlaceCardMark from '../../components/place-card-mark/place-card-mark';
 import { AppRoute, CITIES } from '../../const';
-import { Offer } from '../../types/offer';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { getFavoriteOffers } from '../../store/six-cities-data/selectors';
+import { useEffect } from 'react';
+import { fetchFavoriteOffersAction } from '../../store/api-actions';
+import CitiesCard from '../../components/cities-card/cities-card';
 
-type PageFavoritesProps = {
-  offers: Offer[];
-}
+function PageFavorites(): JSX.Element {
+  const dispatch = useAppDispatch();
 
-function PageFavorites({offers}: PageFavoritesProps): JSX.Element {
+  useEffect(() => {
+    dispatch(fetchFavoriteOffersAction());
+  }, [dispatch]);
+
+  const offers = useAppSelector(getFavoriteOffers);
+
   return (
     <div className="page">
       <Header />
@@ -31,53 +38,13 @@ function PageFavorites({offers}: PageFavoritesProps): JSX.Element {
                       </div>
                       <div className="favorites__places">
                         {cityOffers.map((cityOffer) => (
-                          <article className="favorites__card place-card" key={cityOffer.id}>
-                            {cityOffer.isPremium && <PlaceCardMark/>}
-                            <div className="favorites__image-wrapper place-card__image-wrapper">
-                              <a href="#">
-                                <img
-                                  className="place-card__image"
-                                  src={cityOffer.previewImage}
-                                  width={150}
-                                  height={110}
-                                  alt="Place image"
-                                />
-                              </a>
-                            </div>
-                            <div className="favorites__card-info place-card__info">
-                              <div className="place-card__price-wrapper">
-                                <div className="place-card__price">
-                                  <b className="place-card__price-value">€{cityOffer.price}</b>
-                                  <span className="place-card__price-text">
-                                    /&nbsp;night
-                                  </span>
-                                </div>
-                                <button
-                                  className="place-card__bookmark-button place-card__bookmark-button--active button"
-                                  type="button"
-                                >
-                                  <svg
-                                    className="place-card__bookmark-icon"
-                                    width={18}
-                                    height={19}
-                                  >
-                                    <use xlinkHref="#icon-bookmark" />
-                                  </svg>
-                                  <span className="visually-hidden">In bookmarks</span>
-                                </button>
-                              </div>
-                              <div className="place-card__rating rating">
-                                <div className="place-card__stars rating__stars">
-                                  <span style={{width: `${Math.round(cityOffer.rating) * 20}%`}}/>
-                                  <span className="visually-hidden">Rating</span>
-                                </div>
-                              </div>
-                              <h2 className="place-card__name">
-                                <a href="#">{cityOffer.title}</a>
-                              </h2>
-                              <p className="place-card__type">{cityOffer.type.charAt(0).toUpperCase() + cityOffer.type.slice(1)}</p>
-                            </div>
-                          </article>
+                          <CitiesCard
+                            offer={cityOffer}
+                            key={cityOffer.id}
+                            classNameContainer={'favorites'}
+                            width={150}
+                            height={110}
+                          />
                         ))}
                       </div>
                     </li>

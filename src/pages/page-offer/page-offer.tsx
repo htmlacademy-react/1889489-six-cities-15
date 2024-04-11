@@ -3,11 +3,12 @@ import Header from '../../components/header/header';
 import OfferReviews from '../../components/offer-reviews/offer-reviews';
 import Map from '../../components/map/map';
 import CitiesCard from '../../components/cities-card/cities-card';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { store } from '../../store';
 import { fetchCommentsAction, fetchNearbyOfferAction, fetchOfferIdAction } from '../../store/api-actions';
 import { useAppSelector } from '../../hooks';
 import { getComments, getNearbyOffer, getOffer } from '../../store/six-cities-data/selectors';
+import { Offer } from '../../types/offer';
 
 function OfferMark(): JSX.Element {
   return (
@@ -30,18 +31,10 @@ function PageOffer(): JSX.Element | undefined {
 
   const offer = useAppSelector(getOffer);
   const nearbyOffer = useAppSelector(getNearbyOffer).slice(0, 3);
+
+  const nearbyOfferForMap: Offer[] = [...nearbyOffer, {...offer!, previewImage: '',}];
+
   const comments = useAppSelector(getComments);
-
-  const [activeCard, setActiveCard] = useState('');
-
-  const handleActiveCard = (evt: { currentTarget: HTMLElement }) => {
-    const currentId = evt.currentTarget.getAttribute('id');
-    setActiveCard(currentId === null ? '' : currentId);
-  };
-
-  const handleNotActiveCard = () => {
-    setActiveCard('');
-  };
 
   if (offer && nearbyOffer.length !== 0 && comments.length !== 0) {
     return (
@@ -131,21 +124,21 @@ function PageOffer(): JSX.Element | undefined {
                 <OfferReviews comments={comments} offerId={offer.id} />
               </div>
             </div>
-            <Map offers={nearbyOffer} selectedPointId={activeCard} classNameContainer={'offer__map'}/>
+            <Map offers={nearbyOfferForMap} selectedPointId={offer.id} classNameContainer={'offer__map'}/>
           </section>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">
-          Other places in the neighbourhood
+                Other places in the neighbourhood
               </h2>
               <div className="near-places__list places__list">
                 {nearbyOffer.map((nearOffer) => (
                   <CitiesCard
                     offer={nearOffer}
                     key={nearOffer.id}
-                    onActiveCardCallback={handleActiveCard}
-                    onNotActiveCardCallback={handleNotActiveCard}
                     classNameContainer={'near-places'}
+                    width={260}
+                    height={200}
                   />
                 ))}
               </div>

@@ -1,17 +1,28 @@
+import { useEffect } from 'react';
 import HeaderNavList from '../../components/header-nav-list/header-nav-list';
 import LocationsTabsList from '../../components/locations-tabs-list/locations-tabs-list';
 import MainEmpty from '../../components/main-empty/main-empty';
 import OffersList from '../../components/offers-list/offers-list';
-import { TypesOfSorting } from '../../const';
+import { AuthorizationStatus, TypesOfSorting } from '../../const';
 import { useAppSelector } from '../../hooks';
+import { store } from '../../store';
+import { fetchFavoriteOffersAction } from '../../store/api-actions';
 import { getErrorStatus, getOffers } from '../../store/six-cities-data/selectors';
 import { getCity, getSortingType } from '../../store/six-cities-process/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 function PageMain(): JSX.Element {
   const offersState = useAppSelector(getOffers);
   const selectedCity = useAppSelector(getCity);
   const sortingType = useAppSelector(getSortingType);
   const hasError = useAppSelector(getErrorStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      store.dispatch(fetchFavoriteOffersAction());
+    }
+  }, [authorizationStatus]);
 
   const offersSelectedCity = offersState.filter((offer) => offer.city.name === selectedCity);
   const citiesPlacesCount = offersSelectedCity.length;
